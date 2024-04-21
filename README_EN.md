@@ -35,8 +35,21 @@ pip install -r requirements.txt
 ```
 
 ### Running Results
+* 1 Answer Question by System.
+```python
+from genshin_impact_rag import *
+out = run_problem_context_prompt("夜兰喜欢吃什么？")
+print(out)
+```
 
-Following are results of problem in simple way.
+* 2 Answer Question by specifical character
+```python
+from genshin_impact_rag import *
+out = run_problem_context_prompt_in_character_manner("优菈" ,"夜兰喜欢吃什么？")
+print(out)
+```
+
+Following are results of problem anawer by system.
 
 |    | Question                   | Answer     |
 |---:|:---------------------------|:-----------|
@@ -79,39 +92,26 @@ I recommand you run the demo on GPU (12GB gpu memory is enough, all examples hav
 |Name | Type | HuggingFace Dataset link |
 |---------|--------|--------|
 | svjack/genshin_book_chunks_with_qa_sp | Genshin Impact Book Content | https://huggingface.co/datasets/svjack/genshin_book_chunks_with_qa_sp |
-| svjack/bge_small_book_chunks_prebuld | Genshin Impact Book Embedding | https://huggingface.co/datasets/svjack/bge_small_book_chunks_prebuld |
+| svjack/bge_small_qq_qa_prebuld | Genshin Impact QA Embedding | https://huggingface.co/datasets/svjack/bge_small_qq_qa_prebuld |
 
-### Basic Models
+### Models
 |Name | Type | HuggingFace Model link |
 |---------|--------|--------|
-| svjack/bge-small-book-qa | Embedding model | https://huggingface.co/svjack/bge-small-book-qa |
-| svjack/setfit_info_cls | Text Classifier | https://huggingface.co/svjack/setfit_info_cls |
-
-### LLM Models
-|Name | Type | HuggingFace Model link |
-|---------|--------|--------|
-| svjack/chatglm3-6b-bin | ChatGLM3-6B 4bit quantization | https://huggingface.co/svjack/chatglm3-6b-bin |
-| svjack/mistral-7b | Mistral-7B 4bit quantization | https://huggingface.co/svjack/mistral-7b |
+| svjack/bge-small-qq-qa | Embedding model | https://huggingface.co/svjack/bge-small-qq-qa |
+| Qwen/Qwen1.5-14B-Chat-GGUF | Qwen1.5-14B-Chat | https://huggingface.co/Qwen/Qwen1.5-14B-Chat-GGUF |
 
 <br/><br/>
 
 ## Architecture
 This project has a traditional RAG structure.<br/>
-[svjack/bge-small-book-qa](https://huggingface.co/svjack/bge-small-book-qa) is a self-trained embedding model
-for recall genshin book contents (split by langChain TextSplitter). [svjack/setfit_info_cls](https://huggingface.co/svjack/setfit_info_cls) is a self-trained text classifier for determine whether the content is relevant to the query. <br/> <br/>
+[svjack/bge-small-qq-qa](https://huggingface.co/svjack/bge-small-qq-qa) is a self-trained embedding model
+for recall genshin impact contents. <br/> <br/>
 
-LLM Part have 4 different llm frameworks: [HayStack](https://github.com/deepset-ai/haystack) [chatglm.cpp](https://github.com/li-plus/chatglm.cpp) [llama-cpp-python](https://github.com/abetlen/llama-cpp-python) [ollama](https://github.com/ollama/ollama) one can choose to answer the query based on the content recalled by embedding and filter out by text classifier.<br/> 
-
-### Note
-[HayStack](https://github.com/deepset-ai/haystack) [llama-cpp-python](https://github.com/abetlen/llama-cpp-python) and [ollama](https://github.com/ollama/ollama) are repos contains many different llms. You can try to use different llms and change the model name or model 
-file in the gradio scripts.<br/> * For the ability of understanding the query and context, i recommand you use Mistral-7B in Huggingface Inference Api or Intel/neural-chat in ollama. <br/> * For the ability of answer quality in Chinese, i recommand you Qwen-7B in ollama or ChatGLM3-6B in chatglm.cpp. 
+LLM Part use [Qwen1.5-14B-Chat-GGUF](https://huggingface.co/Qwen/Qwen1.5-14B-Chat-GGUF) to answer the query based on the content recalled by embedding <br/> 
 
 <br/>
 
 ## Futher Reading
-I also release a project about Genshin Impact Character Instruction Models tuned by Lora on LLM (build by ChatGLM3-6B-base Chinese-Llama-2-13B), an attempt to give Instruction Model demo for different genshin impact characters (about 75 characters) <br/>
-If you are interested in it, take a look at [svjack/Genshin-Impact-Character-Instruction](https://github.com/svjack/Genshin-Impact-Character-Instruction) 😊
-
 
 <br/>
 
@@ -126,17 +126,14 @@ svjack - https://huggingface.co/svjack - svjackbt@gmail.com - ehangzhou@outlook.
 <!--
 Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 -->
-Project Link:[https://github.com/svjack/Genshin-Impact-BookQA-LLM](https://github.com/svjack/Genshin-Impact-BookQA-LLM)
+Project Link:[https://github.com/svjack/Genshin-Impact-RAG](https://github.com/svjack/Genshin-Impact-RAG)
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 * [Genshin Impact](https://genshin.hoyoverse.com/en/)
 * [Huggingface](https://huggingface.co)
-* [Mistral-7B](https://mistral.ai/news/announcing-mistral-7b/)
-* [LangChain](https://github.com/langchain-ai/langchain)
-* [SetFit](https://github.com/huggingface/setfit)
-* [HayStack](https://github.com/deepset-ai/haystack)
+* [llama.cpp](https://github.com/ggerganov/llama.cpp)
 * [chatglm.cpp](https://github.com/li-plus/chatglm.cpp)
 * [llama-cpp-python](https://github.com/abetlen/llama-cpp-python)
 * [ollama](https://github.com/ollama/ollama)
