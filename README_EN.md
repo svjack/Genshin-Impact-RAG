@@ -134,8 +134,3 @@ Project Link:[https://github.com/svjack/Genshin-Impact-RAG](https://github.com/s
 * [Genshin Impact](https://genshin.hoyoverse.com/en/)
 * [Huggingface](https://huggingface.co)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp)
-* [chatglm.cpp](https://github.com/li-plus/chatglm.cpp)
-* [llama-cpp-python](https://github.com/abetlen/llama-cpp-python)
-* [ollama](https://github.com/ollama/ollama)
-* [svjack/Genshin-Impact-Character-Instruction](https://github.com/svjack/Genshin-Impact-Character-Instruction)
-* [svjack](https://huggingface.co/svjack)
