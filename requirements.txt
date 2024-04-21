@@ -1,0 +1,7 @@
+llama-cpp-python
+sentence_transformers
+pandas
+numpy
+langchain
+faiss-cpu
+huggingface_hub
