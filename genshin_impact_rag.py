@@ -1,4 +1,5 @@
 '''
+pip install llama-cpp-python
 pip install sentence_transformers
 pip install pandas
 pip install langchain
