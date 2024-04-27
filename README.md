@@ -17,7 +17,7 @@
 [《原神》](https://genshin.hoyoverse.com/en/) 是由米哈游（miHoYo）开发、出品在大陆中国和全球市场上由 HoYoverse发布的动作角色玩家游戏，其环境采用了动画风格的开放世界设计，
 战斗系统基于元素魔法和角色换位。<br/>
 
-本项目是一个尝试构建基于 Qwen1.5-14B-Chat 的原神中文问答系统，采用RAG（Retrieval Augmented Generation）架构。
+本项目是一个尝试构建基于 [Qwen1.5-14B-Chat](https://huggingface.co/Qwen/Qwen1.5-14B-Chat-GGUF) 的原神中文问答系统，采用RAG（Retrieval Augmented Generation）架构。
 
 <br/>
 
