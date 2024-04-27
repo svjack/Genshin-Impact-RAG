@@ -125,6 +125,7 @@ LLM Part use [Qwen1.5-14B-Chat-GGUF](https://huggingface.co/Qwen/Qwen1.5-14B-Cha
 <br/>
 
 ## Futher Reading
+This project is the merge version of [svjack/Genshin-Impact-Character-Instruction](https://github.com/svjack/Genshin-Impact-Character-Instruction) and [svjack/Genshin-Impact-BookQA-LLM](https://github.com/svjack/Genshin-Impact-BookQA-LLM), they provide the knowledge of characters and books, this project use [Qwen1.5-14B-Chat-GGUF](https://huggingface.co/Qwen/Qwen1.5-14B-Chat-GGUF) and [new training embedding](https://huggingface.co/datasets/svjack/bge_small_qq_qa_prebuld) to merge their knowledge and simplify their construction. And improve the accuracy of the effect. If you are interested in them, have a try 😊
 
 <br/>
 
