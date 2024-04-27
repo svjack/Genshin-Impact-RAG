@@ -17,7 +17,7 @@
 [Genshin Impact](https://genshin.hoyoverse.com/en/) is an action role-playing game developed by miHoYo, published by miHoYo in mainland China and worldwide by Cognosphere, 
 HoYoverse. The game features an anime-style open-world environment and an action-based battle system using elemental magic and character-switching. 
 
-This project is an attempt to build Chinese Q&A on Qwen1.5-14B-Chat supported RAG system.
+This project is an attempt to build Chinese Q&A on [Qwen1.5-14B-Chat](https://huggingface.co/Qwen/Qwen1.5-14B-Chat-GGUF) supported RAG system.
 
 <br/>
 
