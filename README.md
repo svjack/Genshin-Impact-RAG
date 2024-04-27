@@ -122,7 +122,7 @@ LLM 使用 [Qwen1.5-14B-Chat-GGUF](https://huggingface.co/Qwen/Qwen1.5-14B-Chat-
 <br/>
 
 ## Futher Reading
-这个工程是 [svjack/Genshin-Impact-Character-Instruction](https://github.com/svjack/Genshin-Impact-Character-Instruction) 和 [svjack/Genshin-Impact-BookQA-LLM](https://github.com/svjack/Genshin-Impact-BookQA-LLM) 的合并、提升、简化版本。那两个工程提供了此工程需要使用的知识，此工程使用 [Qwen1.5-14B-Chat-GGUF](https://huggingface.co/Qwen/Qwen1.5-14B-Chat-GGUF) 和 [new training embedding](https://huggingface.co/datasets/svjack/bge_small_qq_qa_prebuld) 来融合那两个工程的知识并简化了结构。并且增加了效果的准确性。如果你对它们感兴趣，可以尝试了解他们 😊
+这个工程是 [svjack/Genshin-Impact-Character-Instruction](https://github.com/svjack/Genshin-Impact-Character-Instruction) 和 [svjack/Genshin-Impact-BookQA-LLM](https://github.com/svjack/Genshin-Impact-BookQA-LLM) 的合并、提升、简化版本。那两个工程提供了此工程需要使用的知识，此工程使用 [Qwen1.5-14B-Chat-GGUF](https://huggingface.co/Qwen/Qwen1.5-14B-Chat-GGUF) 和 [新训练的Embedding](https://huggingface.co/datasets/svjack/bge_small_qq_qa_prebuld) 来融合那两个工程的知识并简化了结构。并且增加了效果的准确性。如果你对它们感兴趣，可以尝试了解他们 😊
 
 <br/>
 
