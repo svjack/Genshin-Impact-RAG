@@ -145,3 +145,6 @@ Project Link:[https://github.com/svjack/Genshin-Impact-RAG](https://github.com/s
 * [Genshin Impact](https://genshin.hoyoverse.com/en/)
 * [Huggingface](https://huggingface.co)
 * [llama.cpp](https://github.com/ggerganov/llama.cpp)
+* [Qwen](https://huggingface.co/Qwen)
+* [svjack/Genshin-Impact-Character-Instruction](https://github.com/svjack/Genshin-Impact-Character-Instruction)
+* [svjack/Genshin-Impact-BookQA-LLM](https://github.com/svjack/Genshin-Impact-BookQA-LLM)
