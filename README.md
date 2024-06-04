@@ -33,6 +33,16 @@ pip install -r requirements.txt
 ```
 
 ### 运行结果
+
+#### 使用gradio查看web demo 
+```python
+python gradio_demo.py
+```
+浏览器进入 http://127.0.0.1:7860 查看结果。<br/>
+运行例子视频如下：
+
+
+#### 使用python进行导入、运行
 * 1 系统回答问题：
 ```python
 from genshin_impact_rag_llama_cpp import *
