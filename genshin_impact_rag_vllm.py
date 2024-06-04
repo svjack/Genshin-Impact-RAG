@@ -293,11 +293,12 @@ def run_problem_context_prompt_in_character_manner(
             )
 
             response = openai_predict(
+             [
                 {
                         "role": "user",
                         "content": character_prompt[:3000]
                     }
-                ]
+             ]
             )
             for text in response:
                 yield text
