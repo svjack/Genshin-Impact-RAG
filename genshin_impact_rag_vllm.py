@@ -192,7 +192,7 @@ class QA(BaseModel):
 def run_problem_context_prompt_once(query):
     #from IPython.display import clear_output
     prompt = produce_problem_context_prompt(query)
-    response = openai_predict({
+    response = openai_predict([{
                 "role": "user",
                 "content": prompt[:3000]
             }
