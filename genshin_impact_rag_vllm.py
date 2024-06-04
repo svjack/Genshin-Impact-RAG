@@ -166,6 +166,7 @@ def run_problem_context_prompt_once(query):
             temperature=0.5,
             max_tokens=1024,
             logits_processors=[logits_processor],
+            min_tokens = 1,
         ),
     )
     return json.loads(pd.Series(result).map(
@@ -268,6 +269,7 @@ def run_problem_context_prompt_in_character_manner(
                  temperature=0.5,
                  max_tokens=1024,
                  #logits_processors=[logits_processor],
+                 min_tokens = 1,
              ),
             )
             return pd.Series(result).map(
