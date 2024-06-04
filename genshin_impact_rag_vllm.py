@@ -5,7 +5,56 @@ pip install pandas
 pip install langchain
 pip install faiss-cpu
 pip install huggingface_hub
+pip install vllm
 '''
+
+'''
+python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen1.5-7B-Chat-AWQ --dtype auto \
+ --api-key token-abc123 --quantization awq --max-model-len 6000 --gpu-memory-utilization 0.9
+'''
+
+from openai import OpenAI
+
+import gradio as gr
+
+name_client_dict = {
+    "chat": {
+    "model": "Qwen/Qwen1.5-7B-Chat-AWQ",
+    "client": OpenAI(
+        api_key="token-abc123",
+        base_url="http://localhost:8000/v1",
+    )}
+}
+
+def openai_predict(messages,
+    adapter_name = "chat",
+    temperature = 0.01,
+    response_format = None
+    ):
+    if response_format is None:
+        stream = name_client_dict[adapter_name]["client"].chat.completions.create(
+                model=name_client_dict[adapter_name]["model"],  # Model name to use
+                messages=messages,  # Chat history
+                temperature=temperature,  # Temperature for text generation
+                stream=True,  # Stream response
+        )
+    else:
+        stream = name_client_dict[adapter_name]["client"].chat.completions.create(
+                model=name_client_dict[adapter_name]["model"],  # Model name to use
+                messages=messages,  # Chat history
+                temperature=temperature,  # Temperature for text generation
+                stream=True,  # Stream response
+                response_format = response_format
+        )
+
+    # Read and return generated text from response stream
+    partial_message = ""
+    for chunk in stream:
+        #clear_output(wait = True)
+        partial_message += (chunk.choices[0].delta.content or "")
+        #print(partial_message)
+        yield partial_message
+    #return partial_message
 
 import pandas as pd
 import numpy as np
@@ -134,42 +183,6 @@ def produce_problem_context_prompt(query, k = 10):
     else:
         return "根据下面提供的游戏角色信息及游戏设定信息回答问题：{}".format(query)
 
-def run_problem_context_prompt(query):
-    #from IPython.display import clear_output
-    prompt = produce_problem_context_prompt(query)
-    response = llama.create_chat_completion(
-        messages=[
-            {
-                "role": "user",
-                "content": prompt[:3000]
-            }
-        ],
-        response_format={
-            "type": "json_object",
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "需要回答的问题": {"type": "string"},
-                    "给出的答案": {"type": "string"},
-                    "给出此答案的理由及根据": {"type": "string"},
-                },
-                "required": ["需要回答的问题", "给出的答案", "给出此答案的理由及根据"],
-            }
-        },
-        stream=True,
-    )
-    json_dict_out = ""
-    for chunk in response:
-        delta = chunk["choices"][0]["delta"]
-        if "content" not in delta:
-            continue
-        print(delta["content"], end="", flush=True)
-        json_dict_out += delta["content"]
-    #print()
-    json_dict_out = eval(json_dict_out)
-    #clear_output(wait = True)
-    return json_dict_out
-
 from pydantic import BaseModel, Field
 class QA(BaseModel):
     需要回答的问题: str = Field(..., description="需要回答的问题")
@@ -179,6 +192,19 @@ class QA(BaseModel):
 def run_problem_context_prompt_once(query):
     #from IPython.display import clear_output
     prompt = produce_problem_context_prompt(query)
+    response = openai_predict({
+                "role": "user",
+                "content": prompt[:3000]
+            }
+        ],
+        response_format={
+        "type": "json_object",
+        "schema": QA.schema(),
+    },)
+    for text in response:
+        pass 
+    return json.loads(text)
+    '''
     response = llama.create_chat_completion(
         messages=[
             {
@@ -192,6 +218,7 @@ def run_problem_context_prompt_once(query):
     },
         stream=False,
     )
+    '''
     return json.loads(response["choices"][0]["message"]["content"])
 
 run_problem_context_prompt = run_problem_context_prompt_once
@@ -264,6 +291,18 @@ def run_problem_context_prompt_in_character_manner(
                 query,
                 answer
             )
+
+            response = openai_predict(
+                {
+                        "role": "user",
+                        "content": character_prompt[:3000]
+                    }
+                ]
+            )
+            for text in response:
+                yield text
+            
+            '''
             response = llama.create_chat_completion(
                 messages=[
                     {
@@ -274,7 +313,6 @@ def run_problem_context_prompt_in_character_manner(
                 stream=False,
             )
             return response["choices"][0]["message"]["content"]
-            '''
             req = ""
             for chunk in response:
                 delta = chunk["choices"][0]["delta"]
