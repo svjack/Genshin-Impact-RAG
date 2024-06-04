@@ -9,7 +9,7 @@ pip install vllm
 pip install openai
 '''
 
-import openai 
+from openai import OpenAI
 
 client = OpenAI(
     base_url="http://localhost:8000/v1",
