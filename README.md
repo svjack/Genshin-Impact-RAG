@@ -35,14 +35,14 @@ pip install -r requirements.txt
 ### 运行结果
 * 1 系统回答问题：
 ```python
-from genshin_impact_rag import *
+from genshin_impact_rag_llama_cpp import *
 out = run_problem_context_prompt("夜兰喜欢吃什么？")
 print(out)
 ```
 
 * 2 使用特定角色（NPC）回答问题：
 ```python
-from genshin_impact_rag import *
+from genshin_impact_rag_llama_cpp import *
 out = run_problem_context_prompt_in_character_manner("优菈" ,"夜兰喜欢吃什么？")
 print(out)
 ```
