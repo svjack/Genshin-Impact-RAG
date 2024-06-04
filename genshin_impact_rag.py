@@ -169,6 +169,32 @@ def run_problem_context_prompt(query):
     #clear_output(wait = True)
     return json_dict_out
 
+from pydantic import BaseModel, Field
+class QA(BaseModel):
+    需要回答的问题: str = Field(..., description="需要回答的问题")
+    给出的答案: str = Field(..., description="给出的答案")
+    给出此答案的理由及根据: str = Field(..., description="给出此答案的理由及根据")
+
+def run_problem_context_prompt_once(query):
+    #from IPython.display import clear_output
+    prompt = produce_problem_context_prompt(query)
+    response = llama.create_chat_completion(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt[:3000]
+            }
+        ],
+        response_format={
+        "type": "json_object",
+        "schema": QA.schema(),
+    },
+        stream=False,
+    )
+    return json.loads(response["choices"][0]["message"]["content"])
+
+run_problem_context_prompt = run_problem_context_prompt_once
+
 def produce_problem_context_prompt_in_character_manner(
     character_name,
     character_setting,
@@ -244,8 +270,10 @@ def run_problem_context_prompt_in_character_manner(
                         "content": character_prompt[:3000]
                     }
                 ],
-                stream=True,
+                stream=False,
             )
+            return response["choices"][0]["message"]["content"]
+            '''
             req = ""
             for chunk in response:
                 delta = chunk["choices"][0]["delta"]
@@ -256,6 +284,7 @@ def run_problem_context_prompt_in_character_manner(
             print()
             #clear_output(wait = True)
             return req
+            '''
     return ""
 
 all_characters_in_settings = ['丽莎', '行秋', '优菈', '魈', '五郎', '钟离', '温迪',
