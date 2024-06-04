@@ -9,6 +9,13 @@ pip install vllm
 pip install openai
 '''
 
+import openai 
+
+client = OpenAI(
+    base_url="http://localhost:8000/v1",
+    api_key="token-abc123"
+)
+
 import pandas as pd
 import numpy as np
 import os
