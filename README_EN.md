@@ -41,8 +41,9 @@ pip install -r requirements.txt
 python gradio_demo.py
 ```
 Enter the browser http://127.0.0.1:7860 to view the results. <br/>
-The running example video is as follows (click on the picture below to watch the demo video on YouTube):
-
+The running example video is as follows (click on the picture below to watch the demo video on YouTube):<br/>
+[![Genshin Impact RAG llama cpp](https://img.youtube.com/vi/WUI6iWRm8nY/0.jpg)](https://www.youtube.com/watch?v=WUI6iWRm8nY) <br/>
+ <br/>
 
 #### Use python to import and run
 * 1 Answer Question by System.
