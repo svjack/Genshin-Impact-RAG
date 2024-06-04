@@ -34,7 +34,17 @@ This project is an attempt to build Chinese Q&A on [Qwen1.5-14B-Chat](https://hu
 pip install -r requirements.txt
 ```
 
-### Running Results
+### Run results
+
+#### Use gradient to view the web demo
+```python
+python gradio_demo.py
+```
+Enter the browser http://127.0.0.1:7860 to view the results. <br/>
+The running example video is as follows (click on the picture below to watch the demo video on YouTube):
+
+
+#### Use python to import and run
 * 1 Answer Question by System.
 ```python
 from genshin_impact_rag_llama_cpp import *
