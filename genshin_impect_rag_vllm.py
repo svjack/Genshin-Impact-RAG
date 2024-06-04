@@ -5,6 +5,8 @@ pip install pandas
 pip install langchain
 pip install faiss-cpu
 pip install huggingface_hub
+pip install vllm 
+pip install openai
 '''
 
 import pandas as pd
@@ -34,6 +36,7 @@ if not os.path.exists("bge_small_qq_qa_prebuld"):
         local_dir_use_symlinks = False
     )
 
+'''
 import llama_cpp
 import llama_cpp.llama_tokenizer
 
@@ -45,6 +48,7 @@ llama = llama_cpp.Llama.from_pretrained(
     n_gpu_layers = -1,
     n_ctx = 3060
 )
+'''
 
 qst_qq_qa_mapping_df = pd.read_csv("genshin_book_chunks_with_qa_sp/genshin_qq_qa_mapping.csv").dropna()
 qst_qq_qa_mapping_df
@@ -179,6 +183,20 @@ class QA(BaseModel):
 def run_problem_context_prompt_once(query):
     #from IPython.display import clear_output
     prompt = produce_problem_context_prompt(query)
+    completion = client.chat.completions.create(
+    model="Qwen/Qwen1.5-7B-Chat-AWQ",
+    messages=[
+        #{"role": "system", "content": system_prompt},
+        {"role": "user", "content": prompt}
+    ],
+    extra_body={
+        "stop_token_ids": [128009],
+        "response_format": {"type": "json_object"},
+        "guided_json": QA.schema()
+        }
+    )
+    return json.loads(completion.choices[0].message.content)
+    '''
     response = llama.create_chat_completion(
         messages=[
             {
@@ -193,6 +211,7 @@ def run_problem_context_prompt_once(query):
         stream=False,
     )
     return json.loads(response["choices"][0]["message"]["content"])
+    '''
 
 run_problem_context_prompt = run_problem_context_prompt_once
 
@@ -264,6 +283,20 @@ def run_problem_context_prompt_in_character_manner(
                 query,
                 answer
             )
+            completion = client.chat.completions.create(
+                model="Qwen/Qwen1.5-7B-Chat-AWQ",
+                messages=[
+                    #{"role": "system", "content": system_prompt},
+                    {"role": "user", "content": character_prompt}
+                ],
+                #extra_body={
+                #    "stop_token_ids": [128009],
+                #    "response_format": {"type": "json_object"},
+                #    "guided_json": QA.schema()
+                #    }
+                )
+            return completion.choices[0].message.content
+            '''
             response = llama.create_chat_completion(
                 messages=[
                     {
@@ -274,7 +307,6 @@ def run_problem_context_prompt_in_character_manner(
                 stream=False,
             )
             return response["choices"][0]["message"]["content"]
-            '''
             req = ""
             for chunk in response:
                 delta = chunk["choices"][0]["delta"]
