@@ -6,3 +6,5 @@ langchain
 langchain-community
 faiss-cpu
 huggingface_hub
+gradio 
+vllm
