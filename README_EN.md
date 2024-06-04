@@ -37,14 +37,14 @@ pip install -r requirements.txt
 ### Running Results
 * 1 Answer Question by System.
 ```python
-from genshin_impact_rag import *
+from genshin_impact_rag_llama_cpp import *
 out = run_problem_context_prompt("夜兰喜欢吃什么？")
 print(out)
 ```
 
 * 2 Answer Question by specifical character
 ```python
-from genshin_impact_rag import *
+from genshin_impact_rag_llama_cpp import *
 out = run_problem_context_prompt_in_character_manner("优菈" ,"夜兰喜欢吃什么？")
 print(out)
 ```
