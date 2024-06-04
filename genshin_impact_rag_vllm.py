@@ -83,6 +83,7 @@ if not os.path.exists("bge_small_qq_qa_prebuld"):
         local_dir_use_symlinks = False
     )
 
+'''
 import llama_cpp
 import llama_cpp.llama_tokenizer
 
@@ -94,6 +95,7 @@ llama = llama_cpp.Llama.from_pretrained(
     n_gpu_layers = -1,
     n_ctx = 3060
 )
+'''
 
 qst_qq_qa_mapping_df = pd.read_csv("genshin_book_chunks_with_qa_sp/genshin_qq_qa_mapping.csv").dropna()
 qst_qq_qa_mapping_df
