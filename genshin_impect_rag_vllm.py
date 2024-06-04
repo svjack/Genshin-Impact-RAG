@@ -7,6 +7,9 @@ pip install faiss-cpu
 pip install huggingface_hub
 pip install vllm 
 pip install openai
+
+python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen1.5-14B-Chat-AWQ --dtype auto \
+ --api-key token-abc123 --quantization awq --max-model-len 4000 --gpu-memory-utilization 0.9
 '''
 
 from openai import OpenAI
@@ -191,7 +194,7 @@ def run_problem_context_prompt_once(query):
     #from IPython.display import clear_output
     prompt = produce_problem_context_prompt(query)
     completion = client.chat.completions.create(
-    model="Qwen/Qwen1.5-7B-Chat-AWQ",
+    model="Qwen/Qwen1.5-14B-Chat-AWQ",
     messages=[
         #{"role": "system", "content": system_prompt},
         {"role": "user", "content": prompt}
@@ -291,18 +294,18 @@ def run_problem_context_prompt_in_character_manner(
                 answer
             )
             completion = client.chat.completions.create(
-                model="Qwen/Qwen1.5-7B-Chat-AWQ",
+                model="Qwen/Qwen1.5-14B-Chat-AWQ",
                 messages=[
                     #{"role": "system", "content": system_prompt},
                     {"role": "user", "content": character_prompt}
                 ],
-                #extra_body={
-                #    "stop_token_ids": [128009],
-                #    "response_format": {"type": "json_object"},
-                #    "guided_json": QA.schema()
-                #    }
+                extra_body={
+                    "stop_token_ids": [128009],
+                    "response_format": {"type": "json_object"},
+                    "guided_json": QA.schema()
+                    }
                 )
-            return completion.choices[0].message.content
+            return json.loads(completion.choices[0].message.content)
             '''
             response = llama.create_chat_completion(
                 messages=[
