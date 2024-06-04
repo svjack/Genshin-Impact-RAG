@@ -10,6 +10,7 @@ pip install huggingface_hub
 import pandas as pd
 import numpy as np
 import os
+import json
 
 from langchain.vectorstores import FAISS
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
